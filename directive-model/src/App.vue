@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 
 // メモ computedは非同期処理には向いていない
 
@@ -21,6 +21,12 @@ setInterval(() => {
   const randomCocktail = cocktailDataListInit[rand]
   selectedCocktail.value = randomCocktail
 }, 1000)
+watch([selectedCocktail], () => {
+  console.log('selectedCocktail.value:', selectedCocktail.value)
+})
+watchEffect(() => {
+  console.log('selectedCocktail.value:', selectedCocktail.value)
+})
 </script>
 
 <template>
