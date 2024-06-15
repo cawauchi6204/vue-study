@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const randValue = ref('まだです');
-const onButtonClick = () => {
-  const rand = Math.round(Math.random() * 10)
-  // valueの代入はできる
-  randValue.value = String(rand)
+const pMsg = ref("イベント前(ここをクリック!)")
+const pBgColorEvent = ref("white")
+const onPClickWithEvent = (bgColor: string, event: MouseEvent) => {
+  pBgColorEvent.value = bgColor
+  pMsg.value = String(event.timeStamp)
 }
 </script>
 
 <template>
-  <section>
-    <button v-on:click="onButtonClick">
-      クリック!
-    </button>
-    <p>クリックの結果: {{ randValue }}</p>
-  </section>
+  <p @click="onPClickWithEvent('red', $event)" v-bind:style="{ backgroundColor: pBgColorEvent }">
+    {{ pMsg }}
+  </p>
 </template>
