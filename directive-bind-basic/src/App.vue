@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const isSendButtonDisabled = ref(true)
+const randValue = ref('まだです');
+const onButtonClick = () => {
+  const rand = Math.round(Math.random() * 10)
+  // valueの代入はできる
+  randValue.value = String(rand)
+}
 </script>
 
 <template>
-  <p><button type="button" v-bind:disabled="isSendButtonDisabled">
-    送信
-  </button></p>
+  <section>
+    <button v-on:click="onButtonClick">
+      クリック!
+    </button>
+    <p>クリックの結果: {{ randValue }}</p>
+  </section>
 </template>
