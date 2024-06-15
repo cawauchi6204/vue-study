@@ -6,6 +6,7 @@ const inputNameModel = ref("双方向")
 
 <template>
   <section>
+    <!-- v-model = v-bindとv-on:inputの組み合わせ -->
     <input type="text" v-model="inputNameModel">
     <p>{{ inputNameModel }}</p>
   </section>
