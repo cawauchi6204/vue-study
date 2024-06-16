@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
+import { ref } from 'vue';
 
 interface Props {
   id: number;
@@ -10,18 +9,14 @@ interface Props {
   note?: string;
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(
+  defineProps<Props>(),
+  { note: "--" }
+)
 
 // 一度リアクティブ変数にして変更している
 // 個々のpropsはreadonlyなので、直接変更できない
 const localPoints = ref(props.points)
-const localNote = computed(
-  () => {
-    if (localNote == undefined)
-      return "--"
-    return props.note
-  }
-)
 const pointUp = () => {
   localPoints.value++
 }
@@ -38,7 +33,7 @@ const pointUp = () => {
       <dt>保有ポイント</dt>
       <dd>{{ localPoints }}</dd>
       <dt>備考</dt>
-      <dd>{{ localNote }}</dd>
+      <dd>{{ note }}</dd>
     </dl>
     <button @click="pointUp">ポイント加算</button>
   </section>
