@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 
 interface Props {
   id: number;
@@ -9,16 +8,17 @@ interface Props {
   note?: string;
 }
 
+interface Emits {
+  (event: "incrementPoint", id: number): void
+}
+
 const props = withDefaults(
   defineProps<Props>(),
   { note: "--" }
 )
-
-// 一度リアクティブ変数にして変更している
-// 個々のpropsはreadonlyなので、直接変更できない
-const localPoints = ref(props.points)
+const emit = defineEmits<Emits>()
 const pointUp = () => {
-  localPoints.value++
+  emit("incrementPoint", props.id)
 }
 </script>
 
@@ -31,7 +31,7 @@ const pointUp = () => {
       <dt>メールアドレス</dt>
       <dd>{{ email }}</dd>
       <dt>保有ポイント</dt>
-      <dd>{{ localPoints }}</dd>
+      <dd>{{ points }}</dd>
       <dt>備考</dt>
       <dd>{{ note }}</dd>
     </dl>
