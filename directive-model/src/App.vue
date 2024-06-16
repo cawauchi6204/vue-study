@@ -17,14 +17,6 @@ const totalPoints = computed(
   }
 )
 
-const onIncrementPoint = (id: number) => {
-  const member = memberList.value.get(id)
-  console.log("🚀 ~ incrementPoint ~ member:", member)
-  if (member != undefined) {
-    member.points++
-  }
-}
-
 interface Member {
   id: number
   name: string
@@ -38,7 +30,7 @@ interface Member {
   <h1>会員リスト</h1>
   <p>全会員の保有ポイントの合計: {{ totalPoints }}</p>
   <OneMember v-for="[id, member] in memberList" :key="id" :id="id" :name="member.name" :email="member.email"
-    :points="member.points" :note="member.note" v-on:incrementPoint="onIncrementPoint" />
+    :note="member.note" v-model:points="member.points" />
 </template>
 
 <style>
