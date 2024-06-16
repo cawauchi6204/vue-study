@@ -8,9 +8,8 @@ const taro = ref("田中太郎")
 <template>
   <section>
     <h2>slotの利用</h2>
-    <OneSection :name="taro">
-      <p>連絡がつきません</p>
-    </OneSection>
+    <OneSection :name="taro" />
+    <OneSection name="ziro" />
   </section>
 </template>
 
